@@ -1,24 +1,37 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import Country from './components/country/Country';
 
 function App() {
+
+  const [countries, setCountries] = useState([]);
+  const [addCount, setAddCount] = useState([]);
+  
+  function clickHandle(eachCounty){
+    const newArray = [...addCount, eachCounty]
+    setAddCount(newArray);
+  }
+
+  console.log("addCount: ", addCount);
+
+  useEffect(()=>{
+    fetch("https://restcountries.eu/rest/v2/all")
+    .then(res => res.json())
+    .then(data => {
+      setCountries(data);
+    })
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Total Countries: {countries.length}</h1>
+      <h3>County Added: {addCount.length}</h3>
+      {
+        countries.map(country=><Country country={country} clickHandle={clickHandle}></Country>)
+      }
     </div>
   );
 }

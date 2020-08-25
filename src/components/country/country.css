@@ -1,0 +1,17 @@
+.countyStyle{
+    margin: 20px;
+    padding: 10px;
+    border: 2px solid red;
+}
+.countyStyle img{
+    width: 25vw;
+}
+.countyStyle button{
+    font-weight: 700;
+    padding: 5px 8vw;
+    color: black;
+    background-color: red;
+    border: 2px solid tomato;
+    border-radius: 2px;
+    cursor: pointer;
+}
